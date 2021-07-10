@@ -1,0 +1,44 @@
+
+#!/bin/bash
+echo "rootapi webhook onboarding notification actionsprocessor scheduleprocessor triggerprocessor  allservices"
+
+read -p "Enter your servicename: " servicename
+
+echo "dev uat"
+
+read -p "select the environment to deploy: " env
+
+echo "us-east-1 eu-west-1"
+
+read -p  "select region which you what to deploy: " region
+
+
+if [ "$servicename" = "rootapi" -o "$servicename" = "allservices" ] ; then
+  cd services/rootApi
+  pwd
+  npm install
+  echo "${region}"
+  serverless deploy  --stage="${env}" --region "${region}"
+  echo "Deployment is complete on rootapi"
+fi
+
+if [ "$servicename" = "webhook" -o "$servicename" = "allservices" ] ; then
+   cd services/webhook
+   pwd
+   #npm install
+   serverless deploy --stage="${env}" --region "${region}"
+   echo "Deployment is complete on webhook"
+fi
+if [ "$servicename" = "onboarding" -o "$servicename" = "allservices" ] ; then
+   cd services/onboarding
+    pwd
+    #npm install
+    serverless deploy --stage="${env}" --region "${region}"
+    echo "Deployment is complete on onboarding"
+fi
+if [ "$servicename" = "notification" -o "$servicename" = "allservices" ] ; then
+    cd services/notification
+    pwd
+   #npm install
+   serverless deploy --stage="${env}" --region "${region}"
+   echo "Deployment is complete on  notification"
